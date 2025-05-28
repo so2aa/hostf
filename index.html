@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Magic English Quiz</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom right, #a1c4fd, #c2e9fb);
+      padding: 30px;
+      color: #333;
+    }
+
+    .quiz-container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease-in-out;
+      display: none;
+    }
+
+    .quiz-container.active {
+      display: block;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6a11cb;
+      animation: pulse 1.5s infinite;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-left: 6px solid #6a11cb;
+      background: #f9f9f9;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+      animation: slideIn 0.6s ease-in-out;
+    }
+
+    .question:hover {
+      background: #e1f5fe;
+    }
+
+    .options {
+      margin-left: 20px;
+    }
+
+    .options input {
+      margin-right: 8px;
+    }
+
+    .quote {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f0f4c3;
+      border-left: 8px solid #cddc39;
+      font-style: italic;
+      border-radius: 10px;
+    }
+
+    .btn {
+      background: #6a11cb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #d1ffd1;
+      border: 2px dashed green;
+      border-radius: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="successSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+
+  <div id="slide1" class="quiz-container active">
+    <h1>🧙 Beginner English Quiz 🧙</h1>
+    <form id="form1">
+      <div class="question">
+        <strong>1. What is the plural of "child"?</strong>
+        <div class="options">
+          <label><input type="radio" name="q1" value="wrong"> childs</label><br>
+          <label><input type="radio" name="q1" value="correct"> children</label><br>
+          <label><input type="radio" name="q1" value="wrong"> childsies</label><br>
+          <label><input type="radio" name="q1" value="wrong"> childes</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <strong>2. Which one is a verb?</strong>
+        <div class="options">
+          <label><input type="radio" name="q2" value="correct"> run</label><br>
+          <label><input type="radio" name="q2" value="wrong"> happiness</label><br>
+          <label><input type="radio" name="q2" value="wrong"> quick</label><br>
+          <label><input type="radio" name="q2" value="wrong"> red</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <strong>3. Choose the correct sentence:</strong>
+        <div class="options">
+          <label><input type="radio" name="q3" value="wrong"> She can to swim.</label><br>
+          <label><input type="radio" name="q3" value="wrong"> She cans swim.</label><br>
+          <label><input type="radio" name="q3" value="correct"> She can swim.</label><br>
+          <label><input type="radio" name="q3" value="wrong"> She can swimming.</label>
+        </div>
+      </div>
+
+      <button type="button" class="btn" onclick="nextSlide()">➡️ Next</button>
+    </form>
+  </div>
+
+  <div id="slide2" class="quiz-container">
+    <h1>🔮 Advanced English Quiz 🔮</h1>
+
+    <form id="form2">
+      <div class="question">
+        <strong>8. Which sentence is in the passive voice?</strong>
+        <div class="options">
+          <label><input type="radio" name="q8" value="wrong"> She writes a letter.</label><br>
+          <label><input type="radio" name="q8" value="correct"> A letter is written by her.</label><br>
+          <label><input type="radio" name="q8" value="wrong"> She is writing a letter.</label><br>
+          <label><input type="radio" name="q8" value="wrong"> She has written a letter.</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <strong>9. Choose the correct conditional:</strong>
+        If I had studied harder, I _____ the exam.
+        <div class="options">
+          <label><input type="radio" name="q9" value="correct"> would have passed</label><br>
+          <label><input type="radio" name="q9" value="wrong"> will pass</label><br>
+          <label><input type="radio" name="q9" value="wrong"> would pass</label><br>
+          <label><input type="radio" name="q9" value="wrong"> passed</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <strong>10. Identify the adverb in the sentence: "He ran quickly to the bus stop."</strong>
+        <div class="options">
+          <label><input type="radio" name="q10" value="wrong"> He</label><br>
+          <label><input type="radio" name="q10" value="correct"> quickly</label><br>
+          <label><input type="radio" name="q10" value="wrong"> bus</label><br>
+          <label><input type="radio" name="q10" value="wrong"> stop</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <strong>11. Which one is an abstract noun?</strong>
+        <div class="options">
+          <label><input type="radio" name="q11" value="correct"> freedom</label><br>
+          <label><input type="radio" name="q11" value="wrong"> chair</label><br>
+          <label><input type="radio" name="q11" value="wrong"> pencil</label><br>
+          <label><input type="radio" name="q11" value="wrong"> dog</label>
+        </div>
+      </div>
+
+      <button type="button" class="btn" onclick="prevSlide()">⬅️ Back</button>
+      <button type="button" class="btn" onclick="showResult()">🎉 Show Result</button>
+    </form>
+
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function nextSlide() {
+      document.getElementById('slide1').classList.remove('active');
+      document.getElementById('slide2').classList.add('active');
+    }
+
+    function prevSlide() {
+      document.getElementById('slide2').classList.remove('active');
+      document.getElementById('slide1').classList.add('active');
+    }
+
+    function showResult() {
+      const totalQuestions = 7; // 3 in form1 + 4 in form2
+      let correctAnswers = 0;
+
+      const form1 = document.getElementById("form1");
+      const form2 = document.getElementById("form2");
+
+      [form1, form2].forEach(form => {
+        if (form) {
+          const inputs = form.querySelectorAll("input[type=radio]:checked");
+          inputs.forEach(input => {
+            if (input.value === "correct") {
+              correctAnswers++;
+            }
+          });
+        }
+      });
+
+      if (correctAnswers > 0) {
+        document.getElementById("successSound").play();
+      }
+
+      const resultBox = document.getElementById("result");
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `✅ Correct: ${correctAnswers} / ${totalQuestions}<br>❌ Incorrect: ${totalQuestions - correctAnswers}`;
+    }
+  </script>
+
+</body>
+</html>
